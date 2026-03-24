@@ -37,6 +37,9 @@
     <div id="total" class="total">Total: $0</div>
 
     <div class="actions">
+      <button id="btnConfirmar" style="background:#28a745; color:#fff;">
+  ✅ Confirmar venta
+</button>
       <button class="btn-pdf" id="btnPDF">📄 Descargar PDF</button>
       <button class="btn-wa" id="btnWhatsApp">💬 Enviar por WhatsApp</button>
       <button class="btn-volver" id="btnVolver">↩️ Volver</button>
@@ -69,7 +72,7 @@
       alert('No hay datos de compra. Se te redirigirá a la tienda.');
       window.location.href = 'index.html';
     } else {
-    descontarStock(datosCompra);
+    // descontarStock(datosCompra);
       // Mostrar cliente
       const clienteElem = document.getElementById('cliente');
       clienteElem.innerHTML = `<strong>Cliente:</strong> ${datosCompra.cliente || '-'}`;
@@ -175,6 +178,18 @@
     document.getElementById('btnVolver').addEventListener('click', () => {
       window.location.href = 'index.html';
     });
+
+    document.getElementById('btnConfirmar').addEventListener('click', () => {
+    descontarStock(datosCompra);
+
+    alert('✅ Venta confirmada');
+
+    // Evita que se vuelva a descontar si vuelve atrás
+    localStorage.removeItem('compra');
+
+    // Volver al inicio
+    window.location.href = 'index.html';
+});
   </script>
 </body>
 </html>
